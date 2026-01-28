@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<RootNamespace>Cirreum.Runtime</RootNamespace>
+		<Description>The Runtime Library for Clients that supports Msal Authentication.</Description>
+		<PackageTags>cirreum;authentication;client;msal</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="10.0.2" />
+		<PackageReference Include="Cirreum.Graph.Provider" Version="1.0.28" />
+		<PackageReference Include="Cirreum.Runtime.Wasm" Version="1.0.0" />
+	</ItemGroup>
+
+</Project>
