@@ -152,10 +152,6 @@ public static class EntraAuthenticationExtensions {
 	// Application User
 	//
 
-	//
-	// Application User
-	//
-
 	/// <summary>
 	/// Registers application user services with the specified user type and loader implementation.
 	/// </summary>
