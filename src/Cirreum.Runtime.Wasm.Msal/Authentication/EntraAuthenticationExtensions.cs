@@ -6,6 +6,7 @@ using Cirreum.Presence;
 using Cirreum.Runtime;
 using Cirreum.Runtime.Authentication.Builders;
 using Cirreum.Runtime.Authentication.Providers;
+using Cirreum.Security;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -153,81 +154,61 @@ public static class EntraAuthenticationExtensions {
 	//
 
 	/// <summary>
-	/// Registers application user services with the specified user type and loader implementation.
+	/// Registers an <see cref="IApplicationUserFactory"/> implementation used to create
+	/// <see cref="IApplicationUser"/> instances during initialization.
 	/// </summary>
-	/// <typeparam name="TApplicationUser">The type of the application user that implements <see cref="IApplicationUser"/>.</typeparam>
-	/// <typeparam name="TApplicationUserLoader">The type of the application user loader that implements <see cref="IApplicationUserLoader{TApplicationUser}"/>.</typeparam>
+	/// <typeparam name="TApplicationUserFactory">
+	/// The factory implementation. Must implement <see cref="IApplicationUserFactory"/>.
+	/// </typeparam>
 	/// <param name="builder">The <see cref="IEntraAuthenticationBuilder"/> to add services to.</param>
 	/// <returns>The <see cref="IEntraAuthenticationBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraAuthenticationBuilder AddApplicationUser<TApplicationUser, TApplicationUserLoader>(
+	public static IEntraAuthenticationBuilder AddApplicationUserFactory<TApplicationUserFactory>(
 		this IEntraAuthenticationBuilder builder)
-		where TApplicationUser : class, IApplicationUser
-		where TApplicationUserLoader : class, IApplicationUserLoader<TApplicationUser> {
-
-		// Forward to real method
-		builder.Services.AddApplicationUser<TApplicationUser, TApplicationUserLoader>();
-
+		where TApplicationUserFactory : class, IApplicationUserFactory {
+		builder.Services.AddApplicationUser<TApplicationUserFactory>();
 		return builder;
-
 	}
 
 	/// <summary>
-	/// Registers application user services with a custom loader factory function.
+	/// Registers an <see cref="IApplicationUserFactory"/> using a custom factory function.
 	/// </summary>
-	/// <typeparam name="TApplicationUser">The type of the application user that implements <see cref="IApplicationUser"/>.</typeparam>
 	/// <param name="builder">The <see cref="IEntraAuthenticationBuilder"/> to add services to.</param>
-	/// <param name="loaderFactory">A factory function that creates an instance of <see cref="IApplicationUserLoader{TApplicationUser}"/> using the service provider.</param>
+	/// <param name="factory">A factory function that creates an <see cref="IApplicationUserFactory"/> instance.</param>
 	/// <returns>The <see cref="IEntraAuthenticationBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraAuthenticationBuilder AddApplicationUser<TApplicationUser>(
+	public static IEntraAuthenticationBuilder AddApplicationUserFactory(
 		this IEntraAuthenticationBuilder builder,
-		Func<IServiceProvider, IApplicationUserLoader<TApplicationUser>> loaderFactory)
-		where TApplicationUser : class, IApplicationUser {
-
-		// Forward to real method
-		builder.Services.AddApplicationUser(loaderFactory);
-
+		Func<IServiceProvider, IApplicationUserFactory> factory) {
+		builder.Services.AddApplicationUser(factory);
 		return builder;
-
 	}
 
-
 	/// <summary>
-	/// Registers application user services with the specified user type and loader implementation.
+	/// Registers an <see cref="IApplicationUserFactory"/> implementation used to create
+	/// <see cref="IApplicationUser"/> instances during initialization.
 	/// </summary>
-	/// <typeparam name="TApplicationUser">The type of the application user that implements <see cref="IApplicationUser"/>.</typeparam>
-	/// <typeparam name="TApplicationUserLoader">The type of the application user loader that implements <see cref="IApplicationUserLoader{TApplicationUser}"/>.</typeparam>
+	/// <typeparam name="TApplicationUserFactory">
+	/// The factory implementation. Must implement <see cref="IApplicationUserFactory"/>.
+	/// </typeparam>
 	/// <param name="builder">The <see cref="IEntraExternalBuilder"/> to add services to.</param>
 	/// <returns>The <see cref="IEntraExternalBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraExternalBuilder AddApplicationUser<TApplicationUser, TApplicationUserLoader>(
+	public static IEntraExternalBuilder AddApplicationUserFactory<TApplicationUserFactory>(
 		this IEntraExternalBuilder builder)
-		where TApplicationUser : class, IApplicationUser
-		where TApplicationUserLoader : class, IApplicationUserLoader<TApplicationUser> {
-
-		// Forward to real method
-		builder.Services.AddApplicationUser<TApplicationUser, TApplicationUserLoader>();
-
+		where TApplicationUserFactory : class, IApplicationUserFactory {
+		builder.Services.AddApplicationUser<TApplicationUserFactory>();
 		return builder;
-
 	}
 
 	/// <summary>
-	/// Registers application user services with a custom loader factory function.
+	/// Registers an <see cref="IApplicationUserFactory"/> using a custom factory function.
 	/// </summary>
-	/// <typeparam name="TApplicationUser">The type of the application user that implements <see cref="IApplicationUser"/>.</typeparam>
 	/// <param name="builder">The <see cref="IEntraExternalBuilder"/> to add services to.</param>
-	/// <param name="loaderFactory">A factory function that creates an instance of <see cref="IApplicationUserLoader{TApplicationUser}"/> using the service provider.</param>
+	/// <param name="factory">A factory function that creates an <see cref="IApplicationUserFactory"/> instance.</param>
 	/// <returns>The <see cref="IEntraExternalBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraExternalBuilder AddApplicationUser<TApplicationUser>(
+	public static IEntraExternalBuilder AddApplicationUserFactory(
 		this IEntraExternalBuilder builder,
-		Func<IServiceProvider, IApplicationUserLoader<TApplicationUser>> loaderFactory)
-		where TApplicationUser : class, IApplicationUser {
-
-		// Forward to real method
-		builder.Services.AddApplicationUser(loaderFactory);
-
+		Func<IServiceProvider, IApplicationUserFactory> factory) {
+		builder.Services.AddApplicationUser(factory);
 		return builder;
-
 	}
-
 
 }

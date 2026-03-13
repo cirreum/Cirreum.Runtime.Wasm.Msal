@@ -133,7 +133,7 @@ builder.AddEntraAuth("tenant-id", "client-id")
 
 ```csharp
 builder.AddEntraAuth("tenant-id", "client-id")
-    .AddApplicationUser<AppUser, AppUserLoader>();
+    .AddApplicationUserFactory<AppUserFactory>();
 ```
 
 ### Dynamic Multi-Tenant Authentication
