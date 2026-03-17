@@ -154,60 +154,62 @@ public static class EntraAuthenticationExtensions {
 	//
 
 	/// <summary>
-	/// Registers an <see cref="IApplicationUserFactory"/> implementation used to create
-	/// <see cref="IApplicationUser"/> instances during initialization.
+	/// Registers the <typeparamref name="TResolver"/> as the
+	/// <see cref="IApplicationUserResolver"/> used to resolve application users during initialization.
 	/// </summary>
-	/// <typeparam name="TApplicationUserFactory">
-	/// The factory implementation. Must implement <see cref="IApplicationUserFactory"/>.
+	/// <typeparam name="TResolver">
+	/// The resolver implementation that resolves <see cref="IApplicationUser"/> instances
+	/// from an external user identifier.
 	/// </typeparam>
 	/// <param name="builder">The <see cref="IEntraAuthenticationBuilder"/> to add services to.</param>
 	/// <returns>The <see cref="IEntraAuthenticationBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraAuthenticationBuilder AddApplicationUserFactory<TApplicationUserFactory>(
+	public static IEntraAuthenticationBuilder AddApplicationUserResolver<TResolver>(
 		this IEntraAuthenticationBuilder builder)
-		where TApplicationUserFactory : class, IApplicationUserFactory {
-		builder.Services.AddApplicationUser<TApplicationUserFactory>();
+		where TResolver : class, IApplicationUserResolver {
+		builder.Services.AddApplicationUserResolver<TResolver>();
 		return builder;
 	}
 
 	/// <summary>
-	/// Registers an <see cref="IApplicationUserFactory"/> using a custom factory function.
+	/// Registers an <see cref="IApplicationUserResolver"/> using a custom factory function.
 	/// </summary>
 	/// <param name="builder">The <see cref="IEntraAuthenticationBuilder"/> to add services to.</param>
-	/// <param name="factory">A factory function that creates an <see cref="IApplicationUserFactory"/> instance.</param>
+	/// <param name="factory">A factory function that creates an <see cref="IApplicationUserResolver"/> instance.</param>
 	/// <returns>The <see cref="IEntraAuthenticationBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraAuthenticationBuilder AddApplicationUserFactory(
+	public static IEntraAuthenticationBuilder AddApplicationUserResolver(
 		this IEntraAuthenticationBuilder builder,
-		Func<IServiceProvider, IApplicationUserFactory> factory) {
-		builder.Services.AddApplicationUser(factory);
+		Func<IServiceProvider, IApplicationUserResolver> factory) {
+		builder.Services.AddApplicationUserResolver(factory);
 		return builder;
 	}
 
 	/// <summary>
-	/// Registers an <see cref="IApplicationUserFactory"/> implementation used to create
-	/// <see cref="IApplicationUser"/> instances during initialization.
+	/// Registers the <typeparamref name="TResolver"/> as the
+	/// <see cref="IApplicationUserResolver"/> used to resolve application users during initialization.
 	/// </summary>
-	/// <typeparam name="TApplicationUserFactory">
-	/// The factory implementation. Must implement <see cref="IApplicationUserFactory"/>.
+	/// <typeparam name="TResolver">
+	/// The resolver implementation that resolves <see cref="IApplicationUser"/> instances
+	/// from an external user identifier.
 	/// </typeparam>
 	/// <param name="builder">The <see cref="IEntraExternalBuilder"/> to add services to.</param>
 	/// <returns>The <see cref="IEntraExternalBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraExternalBuilder AddApplicationUserFactory<TApplicationUserFactory>(
+	public static IEntraExternalBuilder AddApplicationUserResolver<TResolver>(
 		this IEntraExternalBuilder builder)
-		where TApplicationUserFactory : class, IApplicationUserFactory {
-		builder.Services.AddApplicationUser<TApplicationUserFactory>();
+		where TResolver : class, IApplicationUserResolver {
+		builder.Services.AddApplicationUserResolver<TResolver>();
 		return builder;
 	}
 
 	/// <summary>
-	/// Registers an <see cref="IApplicationUserFactory"/> using a custom factory function.
+	/// Registers an <see cref="IApplicationUserResolver"/> using a custom factory function.
 	/// </summary>
 	/// <param name="builder">The <see cref="IEntraExternalBuilder"/> to add services to.</param>
-	/// <param name="factory">A factory function that creates an <see cref="IApplicationUserFactory"/> instance.</param>
+	/// <param name="factory">A factory function that creates an <see cref="IApplicationUserResolver"/> instance.</param>
 	/// <returns>The <see cref="IEntraExternalBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraExternalBuilder AddApplicationUserFactory(
+	public static IEntraExternalBuilder AddApplicationUserResolver(
 		this IEntraExternalBuilder builder,
-		Func<IServiceProvider, IApplicationUserFactory> factory) {
-		builder.Services.AddApplicationUser(factory);
+		Func<IServiceProvider, IApplicationUserResolver> factory) {
+		builder.Services.AddApplicationUserResolver(factory);
 		return builder;
 	}
 
