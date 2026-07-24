@@ -19,7 +19,8 @@
 - **Microsoft Graph Integration** - Profile enrichment with configurable depth (minimal, extended, or custom)
 - **Fluent Builder API** - Chainable configuration methods with IntelliSense support
 - **Session Monitoring** - Track user activity and API calls with configurable timeouts
-- **Claims Extensibility** - Custom claims transformations via `IClaimsExtender`
+- **Built-in `custom*` Claim Canonicalization** - Provisioned claims (`customRoles`, `customName`, ...) automatically alias to their native names during authentication — no extender required
+- **Claims Extensibility** - Custom claims transformations via `IClaimsExtender` for advanced scenarios
 - **Authorization Policies** - Pre-configured role-based policies with easy customization
 - **WASM Optimized** - Source-generated logging for minimal bundle size
 
@@ -122,7 +123,27 @@ builder.AddEntraAuth("tenant-id", "client-id")
     });
 ```
 
+### Provisioned `custom*` Claims (Built-in)
+
+Claims minted by a Cirreum Identity provisioner arrive in the token under a `custom*` namespace
+(`customRoles`, `customName`, `customTenant`, ...). The authentication pipeline canonicalizes them
+automatically, before the `ClaimsPrincipal` is built:
+
+- Each `custom*` claim gains a native-named alias — `customRoles` → the configured role claim,
+  `customName` → the configured name claim, `customTenant` → `tenant` — so `IsInRole`,
+  `AuthorizeView`, and `UserProfile` just work.
+- A JSON-array value (`["admin","user"]`) is split into individual claims.
+- The step is additive and idempotent: nothing is removed, and the original `custom*` claims
+  remain visible.
+
+**No `IClaimsExtender` is needed for this.** Write one only for judgment calls the framework
+deliberately leaves to the application — e.g., resolving precedence when a token carries both a
+native claim and its minted `custom*` counterpart, or parsing an app-specific claim shape.
+
 ### Custom Claims Extender
+
+For those advanced transformations, extenders run after the built-in canonicalization with full
+visibility of every claim:
 
 ```csharp
 builder.AddEntraAuth("tenant-id", "client-id")

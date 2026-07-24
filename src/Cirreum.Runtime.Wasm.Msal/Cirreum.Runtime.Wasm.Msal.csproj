@@ -6,8 +6,9 @@
 		<PackageTags>cirreum;authentication;client;msal</PackageTags>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<InternalsVisibleTo Include="Cirreum.Runtime.Wasm.Msal.Tests" />
+	<!-- InternalsVisibleTo: Local Development Only -->
+	<ItemGroup Label="InternalsVisibleTo" Condition="'$(IsLocalBuild)' == 'true'">
+		<InternalsVisibleTo Include="$(AssemblyName).Tests" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -17,7 +18,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="10.0.10" />
 		<PackageReference Include="Cirreum.Graph.Provider" Version="1.0.57" />
-		<PackageReference Include="Cirreum.Runtime.Wasm" Version="1.0.52" />
+		<PackageReference Include="Cirreum.Runtime.Wasm" Version="1.1.0" />
 	</ItemGroup>
 
 </Project>
