@@ -31,7 +31,6 @@ public sealed class GraphMinimalUserProfileEnricher(
 		"displayName",
 		"givenName",
 		"surname",
-		"mailNickname",
 		"mail",
 		"mobilePhone",
 		"preferredLanguage",

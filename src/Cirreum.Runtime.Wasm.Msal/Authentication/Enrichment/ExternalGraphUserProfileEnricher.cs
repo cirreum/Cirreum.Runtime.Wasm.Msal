@@ -29,7 +29,6 @@ public sealed class ExternalGraphUserProfileEnricher(
 		"displayName",
 		"givenName",
 		"surname",
-		"mailNickname",
 		"mail",
 		"mobilePhone",
 		"preferredLanguage",

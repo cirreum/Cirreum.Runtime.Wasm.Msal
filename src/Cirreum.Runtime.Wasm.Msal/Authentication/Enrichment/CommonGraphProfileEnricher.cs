@@ -1,6 +1,5 @@
 ﻿namespace Cirreum.Runtime.Authentication.Enrichment;
 
-using Cirreum.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
 using Microsoft.Graph.Models;
@@ -45,14 +44,14 @@ public abstract class CommonGraphProfileEnricher(
 
 		logger.EnrichingProfile(this.GetType().Name);
 
-		//
-		// Process Common claims
-		//
 #if DEBUG
 		const bool captureUnknownClaims = true;
 #else
 		const bool captureUnknownClaims = false;
 #endif
+		//
+		// Process Claims using the ClaimsUserProfileEnricher
+		//
 		ClaimsUserProfileEnricher.EnrichProfile(profile, identity, captureUnknownClaims);
 
 		//
@@ -122,9 +121,11 @@ public abstract class CommonGraphProfileEnricher(
 		//
 
 		// Core Profile
+		// Nickname is deliberately not set here: it is the OIDC nickname claim (a casual name),
+		// resolved by the claims enrichment above. Graph's MailNickname is the directory mail
+		// alias — a different concept — and must not overwrite (or null out) the claim value.
 		profile.GivenName = graphUser.GivenName;
 		profile.FamilyName = graphUser.Surname;
-		profile.Nickname = graphUser.MailNickname;
 		profile.Birthdate = (graphUser.Birthday ?? DateTimeOffset.MinValue).ToString();
 		profile.Email = graphUser.Mail;
 		profile.PhoneNumber = graphUser.MobilePhone;
@@ -147,7 +148,10 @@ public abstract class CommonGraphProfileEnricher(
 		// EntraID specific
 		profile.Oid = oid;
 		profile.Upn = graphUser.UserPrincipalName;
-		profile.DisplayName = graphUser.DisplayName;
+		// The claims enrichment above already filled DisplayName from claims alone (nickname ->
+		// name -> given+family composite) when possible — the directory display name wins
+		// when Graph has one; otherwise the claims-derived value stands.
+		profile.DisplayName = graphUser.DisplayName ?? profile.DisplayName;
 
 		// Photos
 		profile.Picture = profilePictureUrl ?? "/assets/images/guest-user-icon.svg";

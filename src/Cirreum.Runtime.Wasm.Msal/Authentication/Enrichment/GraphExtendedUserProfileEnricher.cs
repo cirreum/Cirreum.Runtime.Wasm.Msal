@@ -32,7 +32,6 @@ public class GraphExtendedUserProfileEnricher(
 		"displayName",
 		"givenName",
 		"surname",
-		"mailNickname",
 		"birthday",
 		"mail",
 		"mobilePhone",

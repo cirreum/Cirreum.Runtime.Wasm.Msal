@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Graph profile enrichment no longer overwrites `UserProfile.Nickname` with the directory
+  `mailNickname`. `Nickname` is the OIDC `nickname` claim — a casual name, resolved by the
+  claims enrichment — while `mailNickname` is Entra's mail alias (e.g. `jane.smith`), a
+  different concept; the old mapping stomped a genuine `nickname` claim value (or nulled it
+  when Graph returned no alias) and surfaced the alias as if it were a nickname. The
+  `mailNickname` field is also no longer requested in any enricher's Graph `$select`.
+- Graph enrichment left `UserProfile.DisplayName` null when the directory returned no display
+  name (sparse directory data, or a failed Graph query). It now falls back to the `nickname`
+  claim, so a UI consolidated on `DisplayName` doesn't render blank; the directory display
+  name still wins when present.
+
 ## [1.0.46] - 2026-07-24
 
 ### Updated
