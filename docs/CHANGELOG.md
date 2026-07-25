@@ -16,9 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   when Graph returned no alias) and surfaced the alias as if it were a nickname. The
   `mailNickname` field is also no longer requested in any enricher's Graph `$select`.
 - Graph enrichment left `UserProfile.DisplayName` null when the directory returned no display
-  name (sparse directory data, or a failed Graph query). It now falls back to the `nickname`
-  claim, so a UI consolidated on `DisplayName` doesn't render blank; the directory display
-  name still wins when present.
+  name (sparse directory data, or a failed Graph query). The directory display name still wins
+  when present, but it no longer clears a value the claims pass already resolved — the claims
+  enrichment in `Cirreum.Domain` now consolidates `DisplayName` from claims alone (`Nickname`,
+  then the `name` claim, then a given/family composite), so a UI consolidated on `DisplayName`
+  doesn't render blank.
+
+### Updated
+
+- `Cirreum.Runtime.Wasm` 1.1.0 → 1.1.1, which brings that claims-level `DisplayName`
+  consolidation (`Cirreum.Domain` 1.3.x) through to Entra clients.
 
 ## [1.0.46] - 2026-07-24
 
