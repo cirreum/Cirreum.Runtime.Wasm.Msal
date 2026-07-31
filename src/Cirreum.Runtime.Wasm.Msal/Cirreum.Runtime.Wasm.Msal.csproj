@@ -17,8 +17,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="10.0.10" />
-		<PackageReference Include="Cirreum.Graph.Provider" Version="1.0.60" />
-		<PackageReference Include="Cirreum.Runtime.Wasm" Version="1.2.2" />
+		<PackageReference Include="Cirreum.Graph.Provider" Version="1.0.61" />
+		<PackageReference Include="Cirreum.Runtime.Wasm" Version="1.2.3" />
 	</ItemGroup>
 
 </Project>
