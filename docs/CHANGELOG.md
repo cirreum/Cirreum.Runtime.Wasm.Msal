@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Updated
+
+- Re-pinned `Cirreum.Runtime.Wasm` `2.0.0` → `2.0.1` — **take this immediately if you took
+  2.0.0**: it makes `AppRouteView` probe the framework bootstrap client (in 2.0.0 the
+  `NotProvisioned`/`Disabled` states were unreachable under `AddApplicationUser`), and renames
+  its pass-through fragments `NotAuthorizedContent`/`AuthorizingContent` →
+  `NotAuthorized`/`Authorizing` (compile-time markup error where the old names were used).
+
 ## [2.0.0] - 2026-08-04
 
 ### Breaking
