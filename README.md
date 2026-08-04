@@ -152,9 +152,13 @@ builder.AddEntraAuth("tenant-id", "client-id")
 
 ### Application User Integration
 
+Register your application-user type and the base URI of your Cirreum server; the framework
+fetches the caller's own record from the server's bootstrap endpoint during initialization —
+no client-side resolver to write:
+
 ```csharp
 builder.AddEntraAuth("tenant-id", "client-id")
-    .AddApplicationUserResolver<AppUserResolver>();
+    .AddApplicationUser<AppUser>(new Uri("https://api.example.com/"));
 ```
 
 ### Dynamic Multi-Tenant Authentication

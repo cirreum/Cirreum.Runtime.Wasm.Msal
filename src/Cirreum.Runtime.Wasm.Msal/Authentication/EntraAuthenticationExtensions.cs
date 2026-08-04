@@ -154,62 +154,44 @@ public static class EntraAuthenticationExtensions {
 	//
 
 	/// <summary>
-	/// Registers the <typeparamref name="TResolver"/> as the
-	/// <see cref="IApplicationUserResolver"/> used to resolve application users during initialization.
+	/// Registers the app's application-user type; during initialization the framework
+	/// fetches the caller's own application user from the server's bootstrap endpoint on
+	/// <paramref name="serviceUri"/>. Replaces the removed
+	/// <c>AddApplicationUserResolver</c> — apps no longer write a client-side resolver.
 	/// </summary>
-	/// <typeparam name="TResolver">
-	/// The resolver implementation that resolves <see cref="IApplicationUser"/> instances
-	/// from an external user identifier.
+	/// <typeparam name="TUser">
+	/// The app's <see cref="IApplicationUser"/> implementation — the type the server-side
+	/// resolver returns.
 	/// </typeparam>
 	/// <param name="builder">The <see cref="IEntraAuthenticationBuilder"/> to add services to.</param>
+	/// <param name="serviceUri">The base URI of the Cirreum server hosting the app's domain.</param>
 	/// <returns>The <see cref="IEntraAuthenticationBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraAuthenticationBuilder AddApplicationUserResolver<TResolver>(
-		this IEntraAuthenticationBuilder builder)
-		where TResolver : class, IApplicationUserResolver {
-		builder.Services.AddApplicationUserResolver<TResolver>();
-		return builder;
-	}
-
-	/// <summary>
-	/// Registers an <see cref="IApplicationUserResolver"/> using a custom factory function.
-	/// </summary>
-	/// <param name="builder">The <see cref="IEntraAuthenticationBuilder"/> to add services to.</param>
-	/// <param name="factory">A factory function that creates an <see cref="IApplicationUserResolver"/> instance.</param>
-	/// <returns>The <see cref="IEntraAuthenticationBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraAuthenticationBuilder AddApplicationUserResolver(
+	public static IEntraAuthenticationBuilder AddApplicationUser<TUser>(
 		this IEntraAuthenticationBuilder builder,
-		Func<IServiceProvider, IApplicationUserResolver> factory) {
-		builder.Services.AddApplicationUserResolver(factory);
+		Uri serviceUri)
+		where TUser : class, IApplicationUser {
+		builder.Services.AddApplicationUser<TUser>(serviceUri);
 		return builder;
 	}
 
 	/// <summary>
-	/// Registers the <typeparamref name="TResolver"/> as the
-	/// <see cref="IApplicationUserResolver"/> used to resolve application users during initialization.
+	/// Registers the app's application-user type; during initialization the framework
+	/// fetches the caller's own application user from the server's bootstrap endpoint on
+	/// <paramref name="serviceUri"/>. Replaces the removed
+	/// <c>AddApplicationUserResolver</c> — apps no longer write a client-side resolver.
 	/// </summary>
-	/// <typeparam name="TResolver">
-	/// The resolver implementation that resolves <see cref="IApplicationUser"/> instances
-	/// from an external user identifier.
+	/// <typeparam name="TUser">
+	/// The app's <see cref="IApplicationUser"/> implementation — the type the server-side
+	/// resolver returns.
 	/// </typeparam>
 	/// <param name="builder">The <see cref="IEntraExternalBuilder"/> to add services to.</param>
+	/// <param name="serviceUri">The base URI of the Cirreum server hosting the app's domain.</param>
 	/// <returns>The <see cref="IEntraExternalBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraExternalBuilder AddApplicationUserResolver<TResolver>(
-		this IEntraExternalBuilder builder)
-		where TResolver : class, IApplicationUserResolver {
-		builder.Services.AddApplicationUserResolver<TResolver>();
-		return builder;
-	}
-
-	/// <summary>
-	/// Registers an <see cref="IApplicationUserResolver"/> using a custom factory function.
-	/// </summary>
-	/// <param name="builder">The <see cref="IEntraExternalBuilder"/> to add services to.</param>
-	/// <param name="factory">A factory function that creates an <see cref="IApplicationUserResolver"/> instance.</param>
-	/// <returns>The <see cref="IEntraExternalBuilder"/> so that additional calls can be chained.</returns>
-	public static IEntraExternalBuilder AddApplicationUserResolver(
+	public static IEntraExternalBuilder AddApplicationUser<TUser>(
 		this IEntraExternalBuilder builder,
-		Func<IServiceProvider, IApplicationUserResolver> factory) {
-		builder.Services.AddApplicationUserResolver(factory);
+		Uri serviceUri)
+		where TUser : class, IApplicationUser {
+		builder.Services.AddApplicationUser<TUser>(serviceUri);
 		return builder;
 	}
 
