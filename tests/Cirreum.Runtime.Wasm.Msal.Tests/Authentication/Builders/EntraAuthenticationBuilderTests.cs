@@ -1,7 +1,7 @@
 namespace Cirreum.Runtime.Tests.Authentication.Builders;
 
 using Cirreum.Runtime.Authentication.Builders;
-using FluentAssertions;
+using AwesomeAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 

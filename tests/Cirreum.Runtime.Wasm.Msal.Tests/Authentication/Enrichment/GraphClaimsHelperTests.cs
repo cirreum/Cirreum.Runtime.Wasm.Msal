@@ -2,7 +2,7 @@ namespace Cirreum.Runtime.Tests.Authentication.Enrichment;
 
 using System.Security.Claims;
 using Cirreum.Runtime.Authentication.Enrichment;
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 
 public class GraphClaimsHelperTests {

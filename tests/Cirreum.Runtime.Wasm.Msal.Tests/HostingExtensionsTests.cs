@@ -2,7 +2,7 @@ extern alias MsalLib;
 
 namespace Cirreum.Runtime.Tests;
 
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 
 using MsalHostingExtensions = MsalLib::Cirreum.Runtime.HostingExtensions;

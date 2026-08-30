@@ -1,7 +1,7 @@
 namespace Cirreum.Runtime.Tests.Authentication.Enrichment;
 
 using Cirreum.Runtime.Authentication.Enrichment;
-using FluentAssertions;
+using AwesomeAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Xunit;

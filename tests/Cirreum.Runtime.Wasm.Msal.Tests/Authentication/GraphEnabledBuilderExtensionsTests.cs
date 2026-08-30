@@ -1,7 +1,7 @@
 namespace Cirreum.Runtime.Tests.Authentication;
 
 using Cirreum.Runtime.Authentication;
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 
 public class GraphEnabledBuilderExtensionsTests {

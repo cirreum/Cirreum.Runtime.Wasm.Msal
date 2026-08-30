@@ -3,7 +3,7 @@ namespace Cirreum.Runtime.Tests.Authentication.Enrichment;
 using Cirreum;
 using Cirreum.Runtime.Authentication.Enrichment;
 using Cirreum.Security;
-using FluentAssertions;
+using AwesomeAssertions;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Graph.Models;
 using NSubstitute;

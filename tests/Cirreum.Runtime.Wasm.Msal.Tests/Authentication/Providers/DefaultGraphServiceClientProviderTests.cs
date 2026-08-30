@@ -1,7 +1,7 @@
 namespace Cirreum.Runtime.Tests.Authentication.Providers;
 
 using Cirreum.Runtime.Authentication.Providers;
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 
 public class DefaultGraphServiceClientProviderTests {

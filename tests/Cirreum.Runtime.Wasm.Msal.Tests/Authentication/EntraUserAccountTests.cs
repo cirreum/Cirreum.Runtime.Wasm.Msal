@@ -2,7 +2,7 @@ namespace Cirreum.Runtime.Tests.Authentication;
 
 using System.Text.Json;
 using Cirreum.Runtime.Authentication;
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 
 public class EntraUserAccountTests {
