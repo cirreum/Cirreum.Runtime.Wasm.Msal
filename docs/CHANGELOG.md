@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Updated
+
+- Re-pinned against the host-invocation wave: **`Cirreum.Persistence.*`**, **`Cirreum.RemoteConnections.*`**, **`Cirreum.Graph.Provider`**, **`Cirreum.Runtime.Wasm`** 4.0.3 — where referenced (all carry `Cirreum.Domain` 5.1.1 / `Cirreum.Contracts` 6.2.0).
+
 ## [2.0.6] - 2026-10-25
 
 ### Updated
